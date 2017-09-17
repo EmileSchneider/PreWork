@@ -1,18 +1,33 @@
 function player(){
-    this.tracks = [];
-    this.currentTrack = '';
-    this.isPlayed = false;
+  this.tracklist = [];
+  this.curentTrack = 0;
+
+  this.add = function (track) {
+    this.tracklist.push(track);
+  };
+  this.play = function (){
+    console.log("Playing: " + this.tracklist[currentTrack].title + "by " + this.tracklist[currentTrack].artist);
+  };
+
+  this.next = function () {
+    if(this.currentTrack++ > this.tracklist.length) {
+      this.currentTrack = 0;
+    } else {
+      this.currentTrack++;
+    }
+  };
+  this.previous = function () {
+    if(this.currentTrack-- < 0){
+      this.currentTrack = this.tracklist.length;
+    } else {
+      this.currentTrack--;
+    }
+  };
 }
 
-player.prototype.addTrack = function(trackName){
-    this.tracks.append(trackName);
+function track(artist, title, album) {
+  this.artist = artist;
+  this.title = title;
+  this.album = album;
 }
-player.prototype.playCurrentTrack = function(){
-    this.isPlayed = true;
-}
-player.prototype.nextTrack = function(){
-    this.currentTrack = this.tracks[(this.tracks.indexOf(this.currentTrack) + 1)]
-}
-player.prototype.prevTrack = function(){
-    this.currentTrack = this.tracks[(this.tracks.indexOf(this.currentTrack) - 1)]    
-}
+var musicPlayer = new player;
